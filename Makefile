@@ -6,7 +6,7 @@
 #    By: vmustone <vmustone@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/24 16:39:22 by emajuri           #+#    #+#              #
-#    Updated: 2023/03/30 19:51:32 by vmustone         ###   ########.fr        #
+#    Updated: 2023/03/30 21:33:53 by vmustone         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRCS = server.c
 
 SRCC = client.c
 
-WWW = -Wall -Wextra -Werror -fsanitize=address
+WWW = -Wall -Wextra -Werror
 
 all: $(LIBFT) $(NAMES) $(NAMEC)
 
