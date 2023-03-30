@@ -6,7 +6,7 @@
 #    By: vmustone <vmustone@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/24 16:39:22 by emajuri           #+#    #+#              #
-#    Updated: 2023/03/28 14:34:09 by vmustone         ###   ########.fr        #
+#    Updated: 2023/03/30 19:51:32 by vmustone         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,24 +20,20 @@ SRCS = server.c
 
 SRCC = client.c
 
-OSRCS = $(SRCS:%.c=%.o)
-
-OSRCC = $(SRCC:%.c=%.o)
-
-WWW = -Wall -Wextra -Werror
+WWW = -Wall -Wextra -Werror -fsanitize=address
 
 all: $(LIBFT) $(NAMES) $(NAMEC)
 
 $(LIBFT):
 	make -C libft
 
-$(NAMES): $(OSRCS)
-	cc $(WWW) $(OSRCS) -L libft -lft -o $(NAMES)
+$(NAMES): $(SRCS)
+	cc $(WWW) $(SRCS) -L libft -lft -o $(NAMES)
 
-$(NAMEC): $(OSRCC)
-	cc $(WWW) $(OSRCC) -L libft -lft -o $(NAMEC)
+$(NAMEC): $(SRCC)
+	cc $(WWW) $(SRCC) -L libft -lft -o $(NAMEC)
+	
 clean:
-	rm -f $(OSRCS) $(OSRCC)
 	make clean -C libft
 
 fclean: clean
