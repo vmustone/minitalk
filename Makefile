@@ -6,40 +6,44 @@
 #    By: vmustone <vmustone@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/24 16:39:22 by emajuri           #+#    #+#              #
-#    Updated: 2023/03/30 21:33:53 by vmustone         ###   ########.fr        #
+#    Updated: 2023/03/31 21:49:33 by vmustone         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAMES = server
+NAME = minitalk
 
-NAMEC = client
+SERVER = server
 
-LIBFT = libft.a
+CLIENT = client
 
-SRCS = server.c
+LIBFT = libft/libft.a
 
-SRCC = client.c
+SRC_SERVER = server.c
+
+SRC_CLIENT = client.c
 
 WWW = -Wall -Wextra -Werror
 
-all: $(LIBFT) $(NAMES) $(NAMEC)
+all: $(LIBFT) $(SERVER) $(CLIENT)
+
+$(NAME): all
 
 $(LIBFT):
 	make -C libft
 
-$(NAMES): $(SRCS)
-	cc $(WWW) $(SRCS) -L libft -lft -o $(NAMES)
+$(SERVER): $(SRC_SERVER) $(LIBFT)
+	cc $(WWW) $(SRC_SERVER) $(LIBFT) -o $(SERVER)
 
-$(NAMEC): $(SRCC)
-	cc $(WWW) $(SRCC) -L libft -lft -o $(NAMEC)
+$(CLIENT): $(SRC_CLIENT) $(LIBFT)
+	cc $(WWW) $(SRC_CLIENT) $(LIBFT) -o $(CLIENT)
 	
 clean:
 	make clean -C libft
 
 fclean: clean
-	rm -f $(NAMES) $(NAMEC)
-	rm -f libft/$(LIBFT)
+	rm -f $(SERVER) $(CLIENT)
+	rm -f $(LIBFT)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: $(NAME) all clean fclean re
